@@ -1,6 +1,7 @@
 import requests
 import json
 import math
+import argparse
 
 
 # function for get http response from given api
@@ -34,7 +35,13 @@ def find_best_robot(loadId,x,y):
 
 
 def main():
+    parser = argparse.ArgumentParser(description='find best robot for the load!')
+    parser.add_argument('-l', '--load',  required=True)
+    parser.add_argument('-x', '--x', type = int, required=True)
+    parser.add_argument('-y', '--y', type = int, required=True)
+    args = parser.parse_args()
+
     get_robot_info()
-    r_id,distance,batterlevel = find_best_robot('test',50,50)
+    r_id,distance,batterlevel = find_best_robot(args.load,args.x,args.y)
     print(r_id)
 main()
